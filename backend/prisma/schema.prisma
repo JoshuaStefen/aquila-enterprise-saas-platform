@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  password    String
+  role        Role     @default(MEMBER)
+  orgId       String?
+  createdAt   DateTime @default(now())
+}
+
+model Project {
+  id        String   @id @default(uuid())
+  name      String
+  orgId     String
+  apiCalls  Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+
+model Organization {
+  id        String   @id @default(uuid())
+  name      String
+  plan      Plan     @default(FREE)
+  users     User[]
+  createdAt DateTime @default(now())
+}
+
+model Subscription {
+  id          String   @id @default(uuid())
+  orgId       String
+  plan        Plan
+  status      String
+  createdAt   DateTime @default(now())
+}
+
+model FeatureFlag {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  enabled   Boolean  @default(false)
+  orgId     String?
+}
+
+model UsageLimit {
+  id          String   @id @default(uuid())
+  orgId       String   @unique
+  maxApiCalls Int
+}
+
+enum Role {
+  SUPERADMIN
+  ADMIN
+  MEMBER
+}
+
+enum Plan {
+  FREE
+  PRO
+  ENTERPRISE
+}
