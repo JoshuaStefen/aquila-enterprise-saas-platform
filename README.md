@@ -15,6 +15,48 @@ It demonstrates **real-world SaaS patterns** including:
 
 ---
 
+## 🏷️ Project Badges
+
+<p align="center">
+  <img src="docs/images/readme-badges.png" alt="Aquila README Badges" />
+</p>
+
+---
+
+## 🖥️ Product UI Preview
+
+### 📊 Dashboard
+
+<p align="center">
+  <img src="docs/images/dashboard.png" alt="Aquila Dashboard UI" />
+</p>
+
+### 📈 Metrics & Monitoring
+
+<p align="center">
+  <img src="docs/images/metrics.png" alt="Aquila Metrics UI" />
+</p>
+
+### 💳 Billing & Plans
+
+<p align="center">
+  <img src="docs/images/billing.png" alt="Aquila Billing UI" />
+</p>
+
+### 🛠️ Admin Panel
+
+<p align="center">
+  <img src="docs/images/admin.png" alt="Aquila Admin UI" />
+</p>
+
+### 📁 Projects Management
+
+<p align="center">
+  <img src="docs/images/projects.png" alt="Aquila Projects UI" />
+</p>
+
+---
+
 ## 🚀 Tech Stack
 
 ### Frontend
@@ -29,57 +71,35 @@ It demonstrates **real-world SaaS patterns** including:
 
 * Node.js
 * Fastify
-* JWT Authentication (access tokens)
+* JWT Authentication (Access & Refresh tokens)
 * Middleware-heavy architecture
 * Event-driven logging
 
 ### Databases
 
 * PostgreSQL (Prisma ORM) — core data
-* MongoDB — logs, audit events, metrics
+* MongoDB — logs, audit trails, metrics
 
 ### DevOps
 
 * Docker & Docker Compose
-* Nginx (reverse proxy)
+* Nginx (reverse proxy / API gateway)
 
 ---
 
 ## 🏗️ Architecture Overview
 
-```
-┌────────────────────────────┐
-│        Client (Browser)    │
-│   Next.js + Tailwind UI    │
-└───────────────┬────────────┘
-                │
-                │ HTTP / REST
-                ▼
-┌────────────────────────────┐
-│        Nginx Gateway       │
-│   Routes /api → Backend   │
-│   Routes / → Frontend     │
-└───────────────┬────────────┘
-                │
-        ┌───────▼────────┐
-        │ Fastify API     │
-        │ ─ Auth & RBAC   │
-        │ ─ Billing       │
-        │ ─ FeatureFlags  │
-        │ ─ Metrics       │
-        │ ─ Admin APIs    │
-        └───────┬────────┘
-                │
-     ┌──────────▼───────────┐
-     │ PostgreSQL (Prisma)  │
-     │ Users / Orgs / Plans │
-     └──────────────────────┘
+<p align="center">
+  <img src="docs/images/architecture-diagram.png" alt="Aquila System Architecture Diagram" />
+</p>
 
-     ┌──────────────────────┐
-     │ MongoDB              │
-     │ Logs / Audit / Stats │
-     └──────────────────────┘
-```
+---
+
+## 🔄 Full System Workflow
+
+<p align="center">
+  <img src="docs/images/system-workflow.png" alt="Aquila System Workflow Diagram" />
+</p>
 
 ---
 
@@ -100,6 +120,16 @@ aquila/
 │   └── .env.example
 ├── nginx/
 │   └── nginx.conf
+├── docs/
+│   └── images/
+│       ├── dashboard.png
+│       ├── metrics.png
+│       ├── billing.png
+│       ├── admin.png
+│       ├── projects.png
+│       ├── architecture-diagram.png
+│       ├── system-workflow.png
+│       └── readme-badges.png
 ├── docker-compose.yml
 └── README.md
 ```
@@ -131,7 +161,7 @@ NEXT_PUBLIC_API_URL=http://localhost
 
 ### 1️⃣ Start Databases
 
-You must have **PostgreSQL** and **MongoDB** running locally.
+Ensure **PostgreSQL** and **MongoDB** are running locally.
 
 ---
 
@@ -171,13 +201,7 @@ http://localhost:3000
 
 ## 🐳 Docker Run (Recommended)
 
-This runs **everything**:
-
-* Frontend
-* Backend
-* PostgreSQL
-* MongoDB
-* Nginx reverse proxy
+Runs **Frontend + Backend + PostgreSQL + MongoDB + Nginx**.
 
 ### 1️⃣ Build & Start
 
@@ -199,7 +223,7 @@ http://localhost
 
 * JWT-based authentication
 * Roles: `MEMBER`, `ADMIN`, `SUPERADMIN`
-* Protected routes (frontend + backend)
+* Protected frontend & backend routes
 
 ### SaaS Billing
 
@@ -210,21 +234,29 @@ http://localhost
 ### Feature Flags
 
 * Backend-controlled toggles
-* Admin UI for enable/disable
-* Org-scoped feature flags
+* Admin UI enable/disable
+* Organization-scoped flags
 
 ### Metrics & Monitoring
 
 * Per-project API usage
-* Real-time dashboard (polling)
-* SVG-based charts
-* Audit trail from MongoDB logs
+* Real-time metrics dashboard
+* Audit logs via MongoDB
 
 ### Admin Panel
 
-* User management
-* Subscription visibility
+* User & org management
+* Subscription oversight
 * Feature flag control
-* System-wide oversight
+* System-wide visibility
 
 ---
+
+## ✅ Production-Ready Highlights
+
+* Multi-tenant SaaS architecture
+* API gateway + reverse proxy
+* Event-driven backend logging
+* Dockerized deployment
+* Scalable & extensible design
+
